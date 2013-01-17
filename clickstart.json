@@ -1,0 +1,29 @@
+{
+    "id": "maven_template",
+    "name": "Hibernate and Tomcat",
+    "source": "git://github.com/CloudBees-community/maven_template.git",
+    "description" : "This is a basic Hibernate and Tomcat application showcasing ORM",
+    "doc-url" : "https://github.com/CloudBees-community/maven_template/blob/master/README.md",
+    "icon" : "https://d3ko533tu1ozfq.cloudfront.net/clickstart/hibernate_icon.png",
+    "app-package" : "https://s3.amazonaws.com/cloudbees-downloads/clickstart/hibernate_basic_maven.war", 
+
+    "supported-by" : "cloudbees",
+    "order" : 2,
+   
+    "runtime": {
+        "type": "tomcat"                
+    },
+    "databases": [
+        {
+            "type": "mysql",
+            "alias": "ExampleDS"
+        }
+    ],
+    "build-with-jenkins": {
+        "template": {
+            "type": "maven",
+            "options": {
+            }
+        }
+    }
+}
