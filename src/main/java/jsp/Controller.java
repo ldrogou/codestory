@@ -37,7 +37,7 @@ public class Controller extends HttpServlet {
         String bodyReq = get(request.getInputStream());
 
         if ("".equals(bodyReq)) {
-            logger.error("Probleme lors de la recupération du post");
+            logger.error("Probl&egraveme lors de la recup&eacuteration du post");
             // Retourne 400 PB
             response.setStatus(410);
         } else {
