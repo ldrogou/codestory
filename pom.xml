@@ -5,11 +5,11 @@
 
   
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.cloudbees.templates</groupId>
-  <artifactId>maven-hibernate-template</artifactId>
+  <groupId>org.laurent.codestory</groupId>
+  <artifactId>codestory</artifactId>
   <version>1.0</version>
   <packaging>war</packaging>
-  <name>A Simple Hibernate Webapp for CloudBees</name>
+  <name>Code story laurent</name>
   <inceptionYear>2012</inceptionYear>
 
   <dependencies>
@@ -17,21 +17,6 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
       <version>1.6.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-core</artifactId>
-      <version>3.6.7.Final</version>
-    </dependency>
-    <dependency>
-      <groupId>javax.persistence</groupId>
-      <artifactId>persistence-api</artifactId>
-      <version>1.0.2</version>
-    </dependency>
-    <dependency>
-      <groupId>javassist</groupId>
-      <artifactId>javassist</artifactId>
-      <version>3.12.1.GA</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -44,7 +29,12 @@
       <artifactId>servlet-api</artifactId>
       <version>6.0.35</version>
       <scope>provided</scope>
-    </dependency>        
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>14.0-rc1</version>
+    </dependency>
   </dependencies>
 
   <pluginRepositories>
@@ -61,7 +51,7 @@
  </pluginRepositories>
 
   <build>
-    <finalName>maven_template</finalName>
+    <finalName>codestory_template</finalName>
     <plugins>
      <plugin>
        <groupId>com.cloudbees</groupId>
