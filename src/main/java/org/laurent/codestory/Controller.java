@@ -2,8 +2,8 @@ package org.laurent.codestory;
 
 import com.google.common.io.CharStreams;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.logging.Level;
 import javax.servlet.ServletException;
 import javax.servlet.ServletInputStream;
@@ -28,6 +28,14 @@ public class Controller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
+        String question = request.getParameter("q");
+        if ("Astubienreculepremierenonce(OUI/NON)".equals(question.replaceAll(" ", "")) ){
+            response.setContentType( "text/html" );
+            PrintWriter out = response.getWriter();
+            out.println( "OUI" );
+            out.close();
+        }
+        
     }
 
     @Override
@@ -39,11 +47,11 @@ public class Controller extends HttpServlet {
         if ("".equals(bodyReq)) {
             logger.error("Probl&egraveme lors de la recup&eacuteration du post");
             // Retourne 400 PB
-            response.setStatus(410);
+            response.setStatus(response.SC_GONE);
         } else {
             logger.info(bodyReq);
             // Retourne 201 pour le post avec succes
-            response.setStatus(201);
+            response.setStatus(response.SC_CREATED);
         }
         
 
