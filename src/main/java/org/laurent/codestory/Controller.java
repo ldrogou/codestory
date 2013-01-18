@@ -16,6 +16,7 @@ public class Controller extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     Logger logger = org.slf4j.LoggerFactory.getLogger(Controller.class);
+    private final static String scalaskel = "/scalaskel/change/";
 
     public Controller() {
         super();
@@ -28,14 +29,17 @@ public class Controller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
-        String question = request.getParameter("q");
-        if ("Astubienreculepremierenonce(OUI/NON)".equals(question.replaceAll(" ", "")) ){
-            response.setContentType( "text/html" );
-            PrintWriter out = response.getWriter();
-            out.println( "OUI" );
-            out.close();
+
+        String question = request.getServletPath();
+
+        //question = request.getParameter("q"); 
+        if ("/".equals(question)) {
+            faireReponseQuestion(response, request.getParameter("q"));
+        } else {
+            int param = getIdentifiant(question);
+            
         }
-        
+
     }
 
     @Override
@@ -53,7 +57,7 @@ public class Controller extends HttpServlet {
             // Retourne 201 pour le post avec succes
             response.setStatus(response.SC_CREATED);
         }
-        
+
 
 
     }
@@ -67,4 +71,28 @@ public class Controller extends HttpServlet {
         }
         return inputStreamPost;
     }
+
+    private int getIdentifiant(String path) {
+        String tab[] = path.split("/");
+        return Integer.valueOf(tab[tab.length - 1]);
+    }
+
+    private void faireReponseQuestion(HttpServletResponse response, String param) {
+        if (ListQuestion.RecuEnonce.getValue().equals(formatQuestion(param))) {
+            response.setContentType("text/html");
+            PrintWriter out = null;
+            try {
+                out = response.getWriter();
+            } catch (IOException ex) {
+                logger.error(ex.getMessage());
+            }
+            out.println("OUI");
+            out.close();
+        }
+    }
+
+    private String formatQuestion(String param){
+        return  param != null ? param.replaceAll(" ", "") : "" ;
+    }
+            
 }
