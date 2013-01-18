@@ -1,4 +1,4 @@
-package jsp;
+package org.laurent.codestory;
 
 import com.google.common.io.CharStreams;
 import java.io.IOException;
