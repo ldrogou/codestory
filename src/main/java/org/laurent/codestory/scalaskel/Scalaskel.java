@@ -8,8 +8,8 @@ package org.laurent.codestory.scalaskel;
  *
  * @author Maelle_Iris
  */
-public enum Scalaskel {
-    
+public enum Scalaskel implements Comparable<Scalaskel> {
+
     Foo(1), Bar(7), Qix(11), Baz(21);
     
     private int value;
@@ -21,6 +21,5 @@ public enum Scalaskel {
     public int getValue(){
         return this.value;
     }
-
     
-};
+}
