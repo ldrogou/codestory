@@ -55,12 +55,10 @@ public class Controller extends HttpServlet {
             int monnaieScalaskelATraiterTotal = monnaieScalaskelATraiter;
 
             for (Scalaskel sca : listEnumScalaSkel) {
-                System.out.println("sca.getValue() " + sca.getValue());
-                int monnaieScalaskelATraiter = monnaieScalaskelATraiterTotal;
+                monnaieScalaskelATraiter = monnaieScalaskelATraiterTotal;
                 if (sca.getValue() <= monnaieScalaskelATraiter) {
                     ScalaskelJson json = new ScalaskelJson();
                     for (Scalaskel scalaloop : listEnumScalaSkel) {
-                        System.out.println("scalaloop.getValue() " + scalaloop.getValue());
                         if (sca.getValue() >= scalaloop.getValue() && monnaieScalaskelATraiter >= scalaloop.getValue()) {
 
                             switch (scalaloop.getValue()) {
@@ -90,7 +88,16 @@ public class Controller extends HttpServlet {
 
             mapper = new ObjectMapper().setVisibility(JsonMethod.FIELD, JsonAutoDetect.Visibility.ANY);
             mapper.setSerializationInclusion(JsonSerialize.Inclusion.NON_NULL);
-            System.out.println(mapper.writeValueAsString(listNewScal));
+            logger.info(mapper.writeValueAsString(listNewScal));
+            response.setContentType("application/json");
+            PrintWriter out = null;
+            try {
+                out = response.getWriter();
+            } catch (IOException ex) {
+                logger.error(ex.getMessage());
+            }
+            out.println(mapper.writeValueAsString(listNewScal));
+            out.close();
         }
 
     }
