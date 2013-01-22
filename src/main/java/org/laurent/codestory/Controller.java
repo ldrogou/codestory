@@ -14,21 +14,18 @@ import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.codehaus.jackson.annotate.JsonAutoDetect;
-import org.codehaus.jackson.annotate.JsonMethod;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.laurent.codestory.scalaskel.Scalaskel;
 import org.laurent.codestory.scalaskel.ScalaskelComparator;
-import org.laurent.codestory.scalaskel.ScalaskelJson;
+import org.laurent.codestory.scalaskel.ScalaskelService;
 import org.slf4j.Logger;
 
 public class Controller extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
+    // Logger
     Logger logger = org.slf4j.LoggerFactory.getLogger(Controller.class);
-    public static int monnaieScalaskelATraiter;
-    private final static String scalaskel = "/scalaskel/change/";
+    // Path enonce1 Scalaskel
+    private final static String SCALASKEL = "/scalaskel/change/";
 
     public Controller() {
         super();
@@ -48,58 +45,11 @@ public class Controller extends HttpServlet {
         if ("/".equals(question)) {
             response.setContentType("text/html");
             faireReponseQuestion(response, request.getParameter("q"), "");
-        } else {
-            monnaieScalaskelATraiter = getIdentifiant(question);
-            if (monnaieScalaskelATraiter != 0) {
-                response.setContentType("application/json");
-                faireReponseQuestion(response, "", ecrireJsonScalaskel());
-                
-            }
+        } else if (question.startsWith(SCALASKEL)) {
+            ScalaskelService scalaskelSrv = new ScalaskelService();
+            response.setContentType("application/json");
+            faireReponseQuestion(response, "", scalaskelSrv.ecrireJsonScalaskel(getIdentifiant(question)));
         }
-
-    }
-
-    private String ecrireJsonScalaskel() throws IOException {
-        List<ScalaskelJson> listNewScal = new ArrayList<ScalaskelJson>();
-        List<Scalaskel> listEnumScalaSkel = getListEnumScalaskel();
-        int monnaieScalaskelATraiterTotal = monnaieScalaskelATraiter;
-
-        for (Scalaskel sca : listEnumScalaSkel) {
-            monnaieScalaskelATraiter = monnaieScalaskelATraiterTotal;
-            if (sca.getValue() <= monnaieScalaskelATraiter) {
-                ScalaskelJson json = new ScalaskelJson();
-                for (Scalaskel scalaloop : listEnumScalaSkel) {
-                    if (sca.getValue() >= scalaloop.getValue() && monnaieScalaskelATraiter >= scalaloop.getValue()) {
-
-                        switch (scalaloop.getValue()) {
-                            case 21:
-                                json.setBaz(monnaieScalaskelATraiter / scalaloop.getValue());
-                                break;
-                            case 11:
-                                json.setQix(monnaieScalaskelATraiter / scalaloop.getValue());
-                                break;
-                            case 7:
-                                json.setBar(monnaieScalaskelATraiter / scalaloop.getValue());
-                                break;
-                            case 1:
-                                json.setFoo(monnaieScalaskelATraiter / scalaloop.getValue());
-                                break;
-                        }
-
-                        monnaieScalaskelATraiter = monnaieScalaskelATraiter % scalaloop.getValue();
-
-                    }
-                }
-                listNewScal.add(json);
-            }
-
-        }
-        ObjectMapper mapper = new ObjectMapper();
-
-        mapper = new ObjectMapper().setVisibility(JsonMethod.FIELD, JsonAutoDetect.Visibility.ANY);
-        mapper.setSerializationInclusion(JsonSerialize.Inclusion.NON_NULL);
-        logger.info(mapper.writeValueAsString(listNewScal));
-        return mapper.writeValueAsString(listNewScal);
 
     }
 
@@ -135,7 +85,7 @@ public class Controller extends HttpServlet {
 
     private int getIdentifiant(String path) {
         int resultIdentifiant = 0;
-        if (path.startsWith(scalaskel)) {
+        if (path.startsWith(SCALASKEL)) {
             String tab[] = path.split("/");
             resultIdentifiant = Integer.valueOf(tab[tab.length - 1]);
         }

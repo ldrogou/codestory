@@ -5,18 +5,21 @@
 package org.laurent.codestory.scalaskel;
 
 import java.io.Serializable;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 
 /**
  *
  * @author Maelle_Iris
  */
+@JsonSerialize(include = Inclusion.NON_DEFAULT)
 public class ScalaskelJson implements Serializable{
 
     //private int foo = 0;
     //private int bar = 0;
     //private int qix = 0; 
     //private int baz = 0;
-    private Integer foo;
+    private Integer foo = 0;
 
     /**
      * Get the value of foo
@@ -36,7 +39,7 @@ public class ScalaskelJson implements Serializable{
         this.foo = foo;
     }
 
-    private Integer bar;
+    private Integer bar = 0;
 
     /**
      * Get the value of bar
@@ -56,7 +59,7 @@ public class ScalaskelJson implements Serializable{
         this.bar = bar;
     }
 
-    private Integer qix;
+    private Integer qix = 0;
 
     /**
      * Get the value of qix
@@ -76,7 +79,7 @@ public class ScalaskelJson implements Serializable{
         this.qix = qix;
     }
 
-    private Integer baz;
+    private Integer baz = 0;
 
     /**
      * Get the value of baz
@@ -99,12 +102,18 @@ public class ScalaskelJson implements Serializable{
     public ScalaskelJson() {
     }
 
-    
+    public ScalaskelJson(Integer foo, Integer bar, Integer qix, Integer baz) {
+        this.foo = foo;
+        this.bar = bar;
+        this.qix = qix;
+        this.baz = baz;
+    }
 
-    
-    
-    
-    
+    @Override
+    public String toString() {
+        return "{" + "foo=" + foo + ", bar=" + bar + ", qix=" + qix + ", baz=" + baz + '}';
+    }
+
     
     
 }
