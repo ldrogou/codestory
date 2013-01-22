@@ -29,16 +29,17 @@ public class Controller extends HttpServlet {
 
         String path = request.getServletPath();
         String question = "";
-        //question = request.getParameter("q"); 
+        String ecrireReponse = "";
         if ("/".equals(question)) {
             response.setContentType("text/html");
             question = request.getParameter("q");
         } else if (question.startsWith(Utils.SCALASKEL)) {
             ScalaskelService scalaskelSrv = new ScalaskelService();
             response.setContentType("application/json");
-            question = scalaskelSrv.ecrireJsonScalaskel(Utils.getIdentifiant(path));
+            ecrireReponse = scalaskelSrv.ecrireJsonScalaskel(Utils.getIdentifiant(path));
         }
-        Utils.faireReponseQuestion(response, question);
+        // Appel de l utilitaire
+        Utils.faireReponseQuestion(response, question, ecrireReponse);
 
 
     }

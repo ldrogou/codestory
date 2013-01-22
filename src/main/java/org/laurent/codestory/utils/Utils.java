@@ -67,6 +67,11 @@ public class Utils {
 
     }
 
+    /**
+     * Traite les question en get "q="
+     * @param response
+     * @param param 
+     */
     public static void faireReponseQuestion(HttpServletResponse response, String param, String ecrireDansResponse) {
         if (ListQuestion.RecuEnonce.getValue().equals(formatQuestion(param))) {
             ecrireDansResponse = "OUI";
