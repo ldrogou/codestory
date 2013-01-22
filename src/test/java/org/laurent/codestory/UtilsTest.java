@@ -38,8 +38,13 @@ public class UtilsTest {
     @Test
     public void evaluationMathTest() {
         
-        int equalssss = (Integer) Utils.evaluationMath("1+1");
-        assertEquals(2, equalssss);
+        int evaluation1 = (Integer) Utils.evaluationMath("1+1");
+        int evaluation2 = (Integer) Utils.evaluationMath("(2+3)*6");
+        int evaluation3 = (Integer) Utils.evaluationMath("(9+1)-2*3");
+        
+        assertEquals(2, evaluation1);
+        assertEquals(30, evaluation2);
+        assertEquals(4, evaluation3);
     }
     
     
