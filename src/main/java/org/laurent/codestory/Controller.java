@@ -1,19 +1,12 @@
 package org.laurent.codestory;
 
-import com.google.common.io.CharStreams;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.util.logging.Level;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 import javax.servlet.ServletException;
-import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.laurent.codestory.scalaskel.ScalaskelService;
+import org.laurent.codestory.utils.Utils;
 import org.slf4j.Logger;
 
 public class Controller extends HttpServlet {
@@ -21,8 +14,6 @@ public class Controller extends HttpServlet {
     private static final long serialVersionUID = 1L;
     // Logger
     Logger logger = org.slf4j.LoggerFactory.getLogger(Controller.class);
-    // Path enonce1 Scalaskel
-    private final static String SCALASKEL = "/scalaskel/change/";
 
     public Controller() {
         super();
@@ -36,17 +27,20 @@ public class Controller extends HttpServlet {
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
 
-        String question = request.getServletPath();
-
+        String path = request.getServletPath();
+        String question = "";
+        String ecrireReponse = "";
         //question = request.getParameter("q"); 
         if ("/".equals(question)) {
             response.setContentType("text/html");
-            faireReponseQuestion(response, request.getParameter("q"), "");
-        } else if (question.startsWith(SCALASKEL)) {
+            question = request.getParameter("q");
+        } else if (question.startsWith(Utils.SCALASKEL)) {
             ScalaskelService scalaskelSrv = new ScalaskelService();
             response.setContentType("application/json");
-            faireReponseQuestion(response, "", scalaskelSrv.ecrireJsonScalaskel(getIdentifiant(question)));
+            ecrireReponse = scalaskelSrv.ecrireJsonScalaskel(Utils.getIdentifiant(path));
         }
+        Utils.faireReponseQuestion(response, question, ecrireReponse);
+
 
     }
 
@@ -54,7 +48,7 @@ public class Controller extends HttpServlet {
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
 
-        String bodyReq = get(request.getInputStream());
+        String bodyReq = Utils.get(request.getInputStream());
 
         if ("".equals(bodyReq)) {
             logger.error("Probl&egraveme lors de la recup&eacuteration du post");
@@ -65,62 +59,5 @@ public class Controller extends HttpServlet {
             // Retourne 201 pour le post avec succes
             response.setStatus(HttpServletResponse.SC_CREATED);
         }
-
-
-
-    }
-
-    private String get(ServletInputStream in) {
-        String inputStreamPost = "";
-        try {
-            inputStreamPost = CharStreams.toString(new InputStreamReader(in, "UTF-8"));
-        } catch (IOException ex) {
-            java.util.logging.Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return inputStreamPost;
-    }
-
-    private int getIdentifiant(String path) {
-        int resultIdentifiant = 0;
-        if (path.startsWith(SCALASKEL)) {
-            String tab[] = path.split("/");
-            resultIdentifiant = Integer.valueOf(tab[tab.length - 1]);
-        }
-        return resultIdentifiant;
-
-    }
-
-    private void faireReponseQuestion(HttpServletResponse response, String param, String ecrireDansResponse) {
-        if (ListQuestion.RecuEnonce.getValue().equals(formatQuestion(param))) {
-            ecrireDansResponse = "OUI";
-        } else {
-            ecrireDansResponse = evaluationMath(param);
-        }
-
-        PrintWriter out = null;
-        try {
-            out = response.getWriter();
-        } catch (IOException ex) {
-            logger.error(ex.getMessage());
-        }
-        out.println(ecrireDansResponse);
-        out.close();
-    }
-
-    private String evaluationMath(String param) {
-        String evaluation = "";
-        ScriptEngineManager manager = new ScriptEngineManager();
-        ScriptEngine engine = manager.getEngineByMimeType("text/javascript");
-        try {
-            evaluation = (String) engine.eval(param);
-
-        } catch (ScriptException ex) {
-            evaluation = "KO";
-        }
-        return evaluation;
-    }
-
-    private String formatQuestion(String param) {
-        return param != null ? param.replaceAll(" ", "") : "";
     }
 }
