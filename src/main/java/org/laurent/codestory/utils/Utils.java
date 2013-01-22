@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.logging.Level;
-import javax.naming.Binding;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
@@ -31,11 +30,14 @@ public class Utils {
     public final static String SCALASKEL = "/scalaskel/change/";
 
     public static int evaluationMath(String param) {
-        Double evaluation = 0D;
+        Double evaluation = new Double(0.0);
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByMimeType("text/javascript");
         try {
-            evaluation = (Double) engine.eval(param);
+            logger.info(" param" + param);
+            String expressionAEvaluer = param.replaceAll(" ", "+");
+            logger.info(" expression" + expressionAEvaluer);
+            evaluation = (Double) engine.eval(expressionAEvaluer);
 
         } catch (ScriptException ex) {
             evaluation = -1D;
@@ -69,8 +71,9 @@ public class Utils {
 
     /**
      * Traite les question en get "q="
+     *
      * @param response
-     * @param param 
+     * @param param
      */
     public static void faireReponseQuestion(HttpServletResponse response, String param, String ecrireDansResponse) {
         if (ListQuestion.RecuEnonce.getValue().equals(formatQuestion(param))) {
