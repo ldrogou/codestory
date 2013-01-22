@@ -29,7 +29,6 @@ public class Controller extends HttpServlet {
 
         String path = request.getServletPath();
         String question = "";
-        String ecrireReponse = "";
         //question = request.getParameter("q"); 
         if ("/".equals(question)) {
             response.setContentType("text/html");
@@ -37,9 +36,9 @@ public class Controller extends HttpServlet {
         } else if (question.startsWith(Utils.SCALASKEL)) {
             ScalaskelService scalaskelSrv = new ScalaskelService();
             response.setContentType("application/json");
-            ecrireReponse = scalaskelSrv.ecrireJsonScalaskel(Utils.getIdentifiant(path));
+            question = scalaskelSrv.ecrireJsonScalaskel(Utils.getIdentifiant(path));
         }
-        Utils.faireReponseQuestion(response, question, ecrireReponse);
+        Utils.faireReponseQuestion(response, question);
 
 
     }
