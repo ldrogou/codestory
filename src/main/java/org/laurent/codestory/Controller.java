@@ -4,18 +4,15 @@ import com.google.common.io.CharStreams;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.logging.Level;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import javax.servlet.ServletException;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.laurent.codestory.scalaskel.Scalaskel;
-import org.laurent.codestory.scalaskel.ScalaskelComparator;
 import org.laurent.codestory.scalaskel.ScalaskelService;
 import org.slf4j.Logger;
 
@@ -96,6 +93,8 @@ public class Controller extends HttpServlet {
     private void faireReponseQuestion(HttpServletResponse response, String param, String ecrireDansResponse) {
         if (ListQuestion.RecuEnonce.getValue().equals(formatQuestion(param))) {
             ecrireDansResponse = "OUI";
+        }else {
+            ecrireDansResponse = evaluationMath(param);
         }
 
         PrintWriter out = null;
@@ -108,18 +107,23 @@ public class Controller extends HttpServlet {
         out.close();
     }
 
+    private String evaluationMath(String param){
+        String evaluation = "";
+        ScriptEngineManager manager = new ScriptEngineManager();
+        ScriptEngine engine = manager.getEngineByMimeType("text/javascript");
+        try {
+            if ((Boolean)engine.eval(param)){
+                evaluation = (String) engine.eval(param);
+            }
+        } catch (ScriptException ex) {
+           evaluation = "KO";
+        }
+        return evaluation;
+    }
+    
     private String formatQuestion(String param) {
         return param != null ? param.replaceAll(" ", "") : "";
     }
 
-    public List<Scalaskel> getListEnumScalaskel() {
-
-        List<Scalaskel> maListeMonnaie = new ArrayList<Scalaskel>();
-        maListeMonnaie.addAll(Arrays.asList(Scalaskel.values()));
-        Collections.sort(maListeMonnaie, new ScalaskelComparator());
-
-
-
-        return maListeMonnaie;
-    }
+    
 }
