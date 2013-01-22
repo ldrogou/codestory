@@ -29,20 +29,20 @@ public class Utils {
     // Path enonce1 Scalaskel
     public final static String SCALASKEL = "/scalaskel/change/";
 
-    public static int evaluationMath(String param) {
-        Double evaluation = new Double(0.0);
+    public static String evaluationMath(String param) {
+        String evaluation = "";
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByMimeType("text/javascript");
         try {
             logger.info(" param" + param);
             String expressionAEvaluer = param.replaceAll(" ", "+");
             logger.info(" expression" + expressionAEvaluer);
-            evaluation = (Double) engine.eval(expressionAEvaluer);
+            evaluation = String.valueOf(engine.eval(expressionAEvaluer));
 
         } catch (ScriptException ex) {
-            evaluation = -1D;
+            evaluation = "KO";
         }
-        return evaluation.intValue();
+        return evaluation;
     }
 
     public static String formatQuestion(String param) {
@@ -79,7 +79,7 @@ public class Utils {
         if (ListQuestion.RecuEnonce.getValue().equals(formatQuestion(param))) {
             ecrireDansResponse = "OUI";
         } else {
-            ecrireDansResponse = String.valueOf(evaluationMath(param));
+            ecrireDansResponse = evaluationMath(param);
         }
 
         PrintWriter out = null;
