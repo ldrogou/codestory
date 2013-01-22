@@ -34,11 +34,8 @@ public class Utils {
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByMimeType("text/javascript");
         try {
-            logger.info(" param" + param);
             String expressionAEvaluer = param.replaceAll(" ", "+");
-            logger.info(" expression" + expressionAEvaluer);
             evaluation = String.valueOf(engine.eval(expressionAEvaluer));
-
         } catch (ScriptException ex) {
             evaluation = "KO";
         }
