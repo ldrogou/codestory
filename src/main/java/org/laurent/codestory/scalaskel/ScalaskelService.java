@@ -26,7 +26,7 @@ public class ScalaskelService {
     /**
      * Methode expose pour la construction de la liste de scalaskel contenant toute les possibilites
      * 
-     * @param valeur Valeur à traiter
+     * @param valeur Valeur a traiter
      * @return Liste des possibilites
      * @throws IOException 
      */
@@ -43,15 +43,15 @@ public class ScalaskelService {
 
     /**
      * 
-     * @param value Valeur à traiter pour baz
+     * @param value Valeur a traiter pour baz
      * @return 
      */
     private List<ScalaskelJson> constructBazQixBarFoo(int value) {
-        //Nombre de boucle à effectuer pour Baz
+        //Nombre de boucle a effectuer pour Baz
         int countBaz = getNumberOfChange(value, Scalaskel.Baz);
         //Liste contenant les differentes possibilites
         List<ScalaskelJson> resultList = new ArrayList<ScalaskelJson>();
-        // Boucle servant à initialiser Scalaskel et mise à jour de Baz
+        // Boucle servant a initialiser Scalaskel et mise a jour de Baz
         for (int i = 0; i <= countBaz; i++) {
             constructQixBarFoo(getValue(value, i, Scalaskel.Baz.getValue()), resultList, new ScalaskelJson(0, 0, 0, i));
         }
@@ -60,14 +60,14 @@ public class ScalaskelService {
 
     /**
      * 
-     * @param value Valeur à traiter pour Qix
+     * @param value Valeur a traiter pour Qix
      * @param resultList
      * @param result 
      */
     private void constructQixBarFoo(int value, List<ScalaskelJson> resultList, ScalaskelJson result) {
-        //Nombre de boucle à effectuer pour Qix
+        //Nombre de boucle a effectuer pour Qix
         int countQix = getNumberOfChange(value, Scalaskel.Qix);
-        // Boucle servant à initialiser Scalaskel et mise à jour de Qix
+        // Boucle servant a initialiser Scalaskel et mise a jour de Qix
         for (int i = 0; i <= countQix; i++) {
             constructBarFoo(getValue(value, i, Scalaskel.Qix.getValue()), resultList, new ScalaskelJson(0, 0, i, result.getBaz()));
         }
@@ -75,18 +75,18 @@ public class ScalaskelService {
 
     /**
      * 
-     * @param value Valeur à traiter pour Bar
+     * @param value Valeur a traiter pour Bar
      * @param resultList
      * @param resultQixBaz 
      */
     private void constructBarFoo(int value, List<ScalaskelJson> resultList, ScalaskelJson resultQixBaz) {
-        //Nombre de boucle à effectuer pour Bar
+        //Nombre de boucle a effectuer pour Bar
         int countBar = getNumberOfChange(value, Scalaskel.Bar);
-        // Boucle servant à initialiser Scalaskel et mise à jour de Bar
+        // Boucle servant a initialiser Scalaskel et mise a jour de Bar
         for (int i = 0; i <= countBar; i++) {
             ScalaskelJson result = new ScalaskelJson(0,i,resultQixBaz.getQix(), resultQixBaz.getBaz());
             result.setFoo(getValue(value,i,Scalaskel.Bar.getValue()));
-            //Ajout de l'objet ScalaskelJson à la liste
+            //Ajout de l'objet ScalaskelJson a la liste
             resultList.add(result);
         }
 
