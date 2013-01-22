@@ -93,7 +93,7 @@ public class Controller extends HttpServlet {
     private void faireReponseQuestion(HttpServletResponse response, String param, String ecrireDansResponse) {
         if (ListQuestion.RecuEnonce.getValue().equals(formatQuestion(param))) {
             ecrireDansResponse = "OUI";
-        }else {
+        } else {
             ecrireDansResponse = evaluationMath(param);
         }
 
@@ -107,23 +107,20 @@ public class Controller extends HttpServlet {
         out.close();
     }
 
-    private String evaluationMath(String param){
+    private String evaluationMath(String param) {
         String evaluation = "";
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByMimeType("text/javascript");
         try {
-            if ((Boolean)engine.eval(param)){
-                evaluation = (String) engine.eval(param);
-            }
+            evaluation = (String) engine.eval(param);
+
         } catch (ScriptException ex) {
-           evaluation = "KO";
+            evaluation = "KO";
         }
         return evaluation;
     }
-    
+
     private String formatQuestion(String param) {
         return param != null ? param.replaceAll(" ", "") : "";
     }
-
-    
 }
