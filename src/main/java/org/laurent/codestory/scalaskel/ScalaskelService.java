@@ -24,14 +24,14 @@ public class ScalaskelService {
     Logger logger = org.slf4j.LoggerFactory.getLogger(Controller.class);
 
     /**
-     * Méthode exposé pour la construction de la liste de scalaskel contenant toute les possibilités
+     * Methode expose pour la construction de la liste de scalaskel contenant toute les possibilites
      * 
      * @param valeur Valeur à traiter
-     * @return Liste des possibilités
+     * @return Liste des possibilites
      * @throws IOException 
      */
     public String ecrireJsonScalaskel(int valeur) throws IOException {
-        // Init liste et construction des possibilités
+        // Init liste et construction des possibilites
         List<ScalaskelJson> resultScalaskelJsonList = constructBazQixBarFoo(valeur);
 
         // Mapper json avec option d'inclusion
@@ -49,7 +49,7 @@ public class ScalaskelService {
     private List<ScalaskelJson> constructBazQixBarFoo(int value) {
         //Nombre de boucle à effectuer pour Baz
         int countBaz = getNumberOfChange(value, Scalaskel.Baz);
-        //Liste contenant les différentes possibilités
+        //Liste contenant les differentes possibilites
         List<ScalaskelJson> resultList = new ArrayList<ScalaskelJson>();
         // Boucle servant à initialiser Scalaskel et mise à jour de Baz
         for (int i = 0; i <= countBaz; i++) {
