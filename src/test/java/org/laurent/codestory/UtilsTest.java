@@ -46,7 +46,7 @@ public class UtilsTest {
         assertEquals(String.valueOf(2), evaluation1);
         assertEquals(String.valueOf(30), evaluation2);
         assertEquals(String.valueOf(4), evaluation3);
-        assertEquals(String.valueOf(1.5), evaluation4);
+        assertEquals("1,5", evaluation4);
         
     }
     

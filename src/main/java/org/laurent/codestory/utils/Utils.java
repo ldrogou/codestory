@@ -45,7 +45,7 @@ public class Utils {
         } catch (ScriptException ex) {
             valueReturn = "KO";
         }
-        return valueReturn;
+        return valueReturn.replaceAll("\\.", ",");
     }
 
     public static String formatQuestion(String param) {
