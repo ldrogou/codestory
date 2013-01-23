@@ -34,7 +34,7 @@ public class Utils {
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByMimeType("text/javascript");
         try {
-            String expressionAEvaluer = param.replaceAll(" ", "+");
+            String expressionAEvaluer = param.replaceAll(" ", "+").replaceAll(",", "\\.");
             Double evaluation = (Double) engine.eval(expressionAEvaluer);
             int test = evaluation.intValue();
             if (test == evaluation) {

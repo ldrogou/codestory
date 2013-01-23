@@ -42,11 +42,14 @@ public class UtilsTest {
         String evaluation2 =  Utils.evaluationMath("(2 3)*6");
         String evaluation3 =  Utils.evaluationMath("(9 1)-2*3");
         String evaluation4 =  Utils.evaluationMath("(2 1)/2");
-        
+        String evaluation5 =  Utils.evaluationMath("1,5*4");
+                
         assertEquals(String.valueOf(2), evaluation1);
         assertEquals(String.valueOf(30), evaluation2);
         assertEquals(String.valueOf(4), evaluation3);
         assertEquals("1,5", evaluation4);
+        assertEquals("6", evaluation5);
+        
         
     }
     
