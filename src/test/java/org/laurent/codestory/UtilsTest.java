@@ -43,13 +43,14 @@ public class UtilsTest {
         String evaluation3 =  Utils.evaluationMath("(9 1)-2*3");
         String evaluation4 =  Utils.evaluationMath("(2 1)/2");
         String evaluation5 =  Utils.evaluationMath("1,5*4");
+        String evaluation6 =  Utils.evaluationMath("((1,1+2)+3,14+4+(5+6+7)+(8+9+10)*4267387833344334647677634)/2*553344300034334349999000");
                 
         assertEquals(String.valueOf(2), evaluation1);
         assertEquals(String.valueOf(30), evaluation2);
         assertEquals(String.valueOf(4), evaluation3);
         assertEquals("1,5", evaluation4);
         assertEquals("6", evaluation5);
-        
+        assertEquals("31878018903828899277492024491376690701584023926880", evaluation6);
     }
     
     

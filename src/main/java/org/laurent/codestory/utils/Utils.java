@@ -33,38 +33,20 @@ public class Utils {
     // Path enonce1 Scalaskel
     public final static String SCALASKEL = "/scalaskel/change/";
 
-    public static String evaluationMath(String param)  {
-        
-        Calculable calc ;
+    public static String evaluationMath(String param) {
+
+        Calculable calc;
         BigDecimal result = new BigDecimal(BigInteger.ZERO);
         try {
             calc = new ExpressionBuilder(param.replaceAll(" ", "+").replaceAll(",", "\\.")).build();
-            result = new BigDecimal(calc.calculate(), MathContext.DECIMAL128);
+            result = new BigDecimal(calc.calculate(), MathContext.UNLIMITED);
         } catch (UnknownFunctionException ex) {
             java.util.logging.Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnparsableExpressionException ex) {
             java.util.logging.Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return result.toString().replaceAll("\\.", ",");
-    }
 
-    public static BigInteger getBigInteger(Object value) {
-        BigInteger ret = null;
-        if (value != null) {
-            if (value instanceof BigInteger) {
-                ret = (BigInteger) value;
-            } else if (value instanceof String) {
-                ret = new BigInteger((String) value);
-            } else if (value instanceof BigDecimal) {
-                ret = ((BigDecimal) value).toBigInteger();
-            } else if (value instanceof Number) {
-                ret = BigInteger.valueOf(((Number) value).longValue());
-            } else {
-                throw new ClassCastException("Not possible to coerce [" + value + "] from class " + value.getClass() + " into a BigInteger.");
-            }
-        }
-        return ret;
+        return result.toString().replaceAll("\\.", ",");
     }
 
     public static String formatQuestion(String param) {
@@ -98,9 +80,11 @@ public class Utils {
      * @param param
      */
     public static void faireReponseQuestion(HttpServletResponse response, String param, String ecrireDansResponse) {
-        if (ListQuestion.RecuEnonce.getValue().equals(formatQuestion(param))) {
+        if (ListQuestion.recuEnonce.getValue().equals(formatQuestion(param))) {
             ecrireDansResponse = "OUI";
-        } else {
+        } else if (ListQuestion.eMail.getValue().equals(formatQuestion(param))){
+            ecrireDansResponse = "ldrogou@gmail.com";
+        }else {
             ecrireDansResponse = evaluationMath(param);
         }
 

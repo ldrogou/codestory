@@ -10,7 +10,8 @@ package org.laurent.codestory;
  */
 public enum ListQuestion {
     
-    RecuEnonce("Astubienreculepremierenonce(OUI/NON)");
+    eMail("Quelleesttonadresseemail"),
+    recuEnonce("Astubienreculepremierenonce(OUI/NON)");
     
     private String value;
 
