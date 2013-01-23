@@ -9,7 +9,7 @@ package org.laurent.codestory;
  * @author Maelle_Iris
  */
 public enum ListQuestion {
-    
+
     eMail("Quelleesttonadresseemail"),
     recuEnonce("Astubienreculepremierenonce(OUI/NON)");
      
