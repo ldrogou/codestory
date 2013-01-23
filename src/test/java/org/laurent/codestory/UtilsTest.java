@@ -50,7 +50,6 @@ public class UtilsTest {
         assertEquals("1,5", evaluation4);
         assertEquals("6", evaluation5);
         
-        
     }
     
     

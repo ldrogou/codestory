@@ -5,13 +5,17 @@
 package org.laurent.codestory.utils;
 
 import com.google.common.io.CharStreams;
+import de.congrace.exp4j.Calculable;
+import de.congrace.exp4j.ExpressionBuilder;
+import de.congrace.exp4j.UnknownFunctionException;
+import de.congrace.exp4j.UnparsableExpressionException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.MathContext;
 import java.util.logging.Level;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletResponse;
 import org.laurent.codestory.Controller;
@@ -29,23 +33,38 @@ public class Utils {
     // Path enonce1 Scalaskel
     public final static String SCALASKEL = "/scalaskel/change/";
 
-    public static String evaluationMath(String param) {
-        String valueReturn;
-        ScriptEngineManager manager = new ScriptEngineManager();
-        ScriptEngine engine = manager.getEngineByMimeType("text/javascript");
+    public static String evaluationMath(String param)  {
+        
+        Calculable calc ;
+        BigDecimal result = new BigDecimal(BigInteger.ZERO);
         try {
-            String expressionAEvaluer = param.replaceAll(" ", "+").replaceAll(",", "\\.");
-            Double evaluation = (Double) engine.eval(expressionAEvaluer);
-            int test = evaluation.intValue();
-            if (test == evaluation) {
-                valueReturn = String.valueOf(test);
-            } else {
-                valueReturn = String.valueOf(evaluation);
-            }
-        } catch (ScriptException ex) {
-            valueReturn = "KO";
+            calc = new ExpressionBuilder(param.replaceAll(" ", "+").replaceAll(",", "\\.")).build();
+            result = new BigDecimal(calc.calculate(), MathContext.DECIMAL128);
+        } catch (UnknownFunctionException ex) {
+            java.util.logging.Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnparsableExpressionException ex) {
+            java.util.logging.Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return valueReturn.replaceAll("\\.", ",");
+        
+        return result.toString().replaceAll("\\.", ",");
+    }
+
+    public static BigInteger getBigInteger(Object value) {
+        BigInteger ret = null;
+        if (value != null) {
+            if (value instanceof BigInteger) {
+                ret = (BigInteger) value;
+            } else if (value instanceof String) {
+                ret = new BigInteger((String) value);
+            } else if (value instanceof BigDecimal) {
+                ret = ((BigDecimal) value).toBigInteger();
+            } else if (value instanceof Number) {
+                ret = BigInteger.valueOf(((Number) value).longValue());
+            } else {
+                throw new ClassCastException("Not possible to coerce [" + value + "] from class " + value.getClass() + " into a BigInteger.");
+            }
+        }
+        return ret;
     }
 
     public static String formatQuestion(String param) {
