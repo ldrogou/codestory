@@ -11,7 +11,7 @@ package org.laurent.codestory;
 public enum ListQuestion {
 
     eMail("Quelleesttonadresseemail"),
-    participation("Estuheureuxdeparticiper(OUI/NON)",
+    participation("Estuheureuxdeparticiper(OUI/NON)"),
     recuEnonce("Astubienreculepremierenonce(OUI/NON)");
      
     private String value;
