@@ -38,14 +38,14 @@ public class UtilsTest {
     @Test
     public void evaluationMathTest() {
         
-        String evaluation1 =  Utils.evaluationMath("1+1");
-        String evaluation2 =  Utils.evaluationMath("(2+3)*6");
-        String evaluation3 =  Utils.evaluationMath("(9+1)-2*3");
-        String evaluation4 =  Utils.evaluationMath("(2+1)/2");
+        String evaluation1 =  Utils.evaluationMath("1 1");
+        String evaluation2 =  Utils.evaluationMath("(2 3)*6");
+        String evaluation3 =  Utils.evaluationMath("(9 1)-2*3");
+        String evaluation4 =  Utils.evaluationMath("(2 1)/2");
         
-        assertEquals(String.valueOf(2D), evaluation1);
-        assertEquals(String.valueOf(30D), evaluation2);
-        assertEquals(String.valueOf(4D), evaluation3);
+        assertEquals(String.valueOf(2), evaluation1);
+        assertEquals(String.valueOf(30), evaluation2);
+        assertEquals(String.valueOf(4), evaluation3);
         assertEquals(String.valueOf(1.5), evaluation4);
         
     }

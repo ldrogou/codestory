@@ -30,16 +30,22 @@ public class Utils {
     public final static String SCALASKEL = "/scalaskel/change/";
 
     public static String evaluationMath(String param) {
-        String evaluation = "";
+        String valueReturn;
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByMimeType("text/javascript");
         try {
             String expressionAEvaluer = param.replaceAll(" ", "+");
-            evaluation = String.valueOf(engine.eval(expressionAEvaluer));
+            Double evaluation = (Double) engine.eval(expressionAEvaluer);
+            int test = evaluation.intValue();
+            if (test == evaluation) {
+                valueReturn = String.valueOf(test);
+            } else {
+                valueReturn = String.valueOf(evaluation);
+            }
         } catch (ScriptException ex) {
-            evaluation = "KO";
+            valueReturn = "KO";
         }
-        return evaluation;
+        return valueReturn;
     }
 
     public static String formatQuestion(String param) {
