@@ -48,7 +48,7 @@ public class Utils {
 
         return result.toString().replaceAll("\\.", ",");
     }
-
+ 
     public static String formatQuestion(String param) {
         return param != null ? param.replaceAll(" ", "") : "";
     }

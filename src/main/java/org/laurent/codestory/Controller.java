@@ -40,7 +40,7 @@ public class Controller extends HttpServlet {
         }
         // Appel de l utilitaire
         if (!"null".equals(question) && !"".equals(question) && question != null) {
-            Utils.faireReponseQuestion(response, question, ecrireReponse);
+            Utils.faireReponseQuestion(response, question, ecrireReponse); 
         }
 
     }

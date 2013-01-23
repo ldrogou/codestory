@@ -12,7 +12,7 @@ public enum ListQuestion {
     
     eMail("Quelleesttonadresseemail"),
     recuEnonce("Astubienreculepremierenonce(OUI/NON)");
-    
+     
     private String value;
 
     private ListQuestion(String value) {

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #  Hibernate and tomcat clickstart
 
 This clickstart sets up a database, build service, repository and a basic Java servlet and Hibernate ORM application.
@@ -58,3 +59,9 @@ Or, for JBoss:
 ## To deploy this locally:
 
 Make sure you have a MySQL database bound to java:comp/env/jdbc/ExampleDS, and then deploy in your favorite container.
+=======
+codestor
+========
+
+Code story
+>>>>>>> 1f26b3cec2cad05f1908dff807ce361dcce2adb5
