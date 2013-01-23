@@ -48,7 +48,7 @@ public class Utils {
 
         return result.toString().replaceAll("\\.", ",");
     }
- 
+
     public static String formatQuestion(String param) {
         return param != null ? param.replaceAll(" ", "") : "";
     }
@@ -80,11 +80,12 @@ public class Utils {
      * @param param
      */
     public static void faireReponseQuestion(HttpServletResponse response, String param, String ecrireDansResponse) {
-        if (ListQuestion.recuEnonce.getValue().equals(formatQuestion(param))) {
+        if (ListQuestion.recuEnonce.getValue().equals(formatQuestion(param)) || 
+                ListQuestion.participation.getValue().equals(formatQuestion(param))) {
             ecrireDansResponse = "OUI";
-        } else if (ListQuestion.eMail.getValue().equals(formatQuestion(param))){
+        } else if (ListQuestion.eMail.getValue().equals(formatQuestion(param))) {
             ecrireDansResponse = "ldrogou@gmail.com";
-        }else {
+        } else {
             ecrireDansResponse = evaluationMath(param);
         }
 
