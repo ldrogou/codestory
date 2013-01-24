@@ -85,6 +85,8 @@ public class Utils {
                 ListQuestion.mailing.getValue().equals(formatQuestion(param)) ||
                 ListQuestion.enonce1.getValue().equals(formatQuestion(param)) ) {
             ecrireDansResponse = "OUI";
+        } else if (ListQuestion.repondTjrsOui.getValue().equals(formatQuestion(param))){
+            ecrireDansResponse = "NON";
         } else if (ListQuestion.eMail.getValue().equals(formatQuestion(param))) {
             ecrireDansResponse = "ldrogou@gmail.com";
         } else {

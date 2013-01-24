@@ -14,6 +14,7 @@ public enum ListQuestion {
     participation("Estuheureuxdeparticiper(OUI/NON)"),
     mailing("Estuabonnealamailinglist(OUI/NON)"),
     enonce1("Estupretarecevoiruneenonceauformatmarkdownparhttppost(OUI/NON)"),
+    repondTjrsOui("Estcequeturepondstoujoursoui(OUI/NON)"),
     recuEnonce("Astubienreculepremierenonce(OUI/NON)");
      
     private String value;
