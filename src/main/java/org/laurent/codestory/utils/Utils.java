@@ -45,7 +45,7 @@ public class Utils {
         } catch (UnparsableExpressionException ex) {
             java.util.logging.Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return resultBigDecimal.toString().replaceAll("\\.", ",").replaceAll("\\,00", "").replaceAll("\\,0", "");
+        return resultBigDecimal.toString().replaceAll("\\.", ",").replaceAll("^*[\\.,]0*$", "");
         
     }
 
