@@ -12,6 +12,7 @@ public enum ListQuestion {
 
     eMail("Quelleesttonadresseemail"),
     participation("Estuheureuxdeparticiper(OUI/NON)"),
+    mailing("Estuabonnealamailinglist(OUI/NON)"),
     recuEnonce("Astubienreculepremierenonce(OUI/NON)");
      
     private String value;
