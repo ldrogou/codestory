@@ -36,6 +36,7 @@ public class Controller extends HttpServlet {
         } else if (path.startsWith(Utils.SCALASKEL)) {
             ScalaskelService scalaskelSrv = new ScalaskelService();
             response.setContentType("application/json");
+            question = Utils.SCALASKEL;
             ecrireReponse = scalaskelSrv.ecrireJsonScalaskel(Utils.getIdentifiant(path));
         }
         // Appel de l utilitaire

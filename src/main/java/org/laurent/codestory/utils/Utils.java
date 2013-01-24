@@ -89,9 +89,9 @@ public class Utils {
             ecrireDansResponse = "NON";
         } else if (ListQuestion.eMail.getValue().equals(formatQuestion(param))) {
             ecrireDansResponse = "ldrogou@gmail.com";
-        } else {
+        } else if ("".equals(ecrireDansResponse)) {
             ecrireDansResponse = evaluationMath(param);
-        }
+        } 
 
         PrintWriter out = null;
         try {
