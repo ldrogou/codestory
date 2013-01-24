@@ -11,11 +11,14 @@ package org.laurent.codestory;
 public enum ListQuestion {
 
     eMail("Quelleesttonadresseemail"),
-    participation("Estuheureuxdeparticiper(OUI/NON)"),
-    mailing("Estuabonnealamailinglist(OUI/NON)"),
-    enonce1("Estupretarecevoiruneenonceauformatmarkdownparhttppost(OUI/NON)"),
-    repondTjrsOui("Estcequeturepondstoujoursoui(OUI/NON)"),
-    recuEnonce("Astubienreculepremierenonce(OUI/NON)");
+    OuiNon("(OUI/NON)"),
+    PasTopBofQuelsBugs("(PAS_TOP/BOF/QUELS_BUGS)"),
+    OUI("OUI"),
+    NON("NON"),
+    PAS_TOP("PAS_TOP"),
+    BOF("BOF"),
+    QUELS_BUGS("QUELS_BUGS");
+    
      
     private String value;
 

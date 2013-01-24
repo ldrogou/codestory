@@ -80,13 +80,10 @@ public class Utils {
      * @param param
      */
     public static void faireReponseQuestion(HttpServletResponse response, String param, String ecrireDansResponse) {
-        if (ListQuestion.recuEnonce.getValue().equals(formatQuestion(param)) || 
-                ListQuestion.participation.getValue().equals(formatQuestion(param)) ||
-                ListQuestion.mailing.getValue().equals(formatQuestion(param)) ||
-                ListQuestion.enonce1.getValue().equals(formatQuestion(param)) ) {
-            ecrireDansResponse = "OUI";
-        } else if (ListQuestion.repondTjrsOui.getValue().equals(formatQuestion(param))){
-            ecrireDansResponse = "NON";
+        if (ListQuestion.OuiNon.getValue().endsWith(param)){
+            ecrireDansResponse = ListQuestion.OUI.getValue();
+        } else if (ListQuestion.PasTopBofQuelsBugs.getValue().endsWith(param)){
+            ecrireDansResponse = ListQuestion.BOF.getValue();
         } else if (ListQuestion.eMail.getValue().equals(formatQuestion(param))) {
             ecrireDansResponse = "ldrogou@gmail.com";
         } else if ("".equals(ecrireDansResponse)) {
