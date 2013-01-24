@@ -50,7 +50,6 @@ public class UtilsTest {
         assertEquals("4", evaluation3);
         assertEquals("1,5", evaluation4);
         assertEquals("6", evaluation5);
-        System.out.println("evaluation 6 " + evaluation6);
         assertEquals("31878018903828899277492024491376690701584023926880", evaluation6);
     }
     
