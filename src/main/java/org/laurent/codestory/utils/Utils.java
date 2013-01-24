@@ -80,10 +80,12 @@ public class Utils {
      * @param param
      */
     public static void faireReponseQuestion(HttpServletResponse response, String param, String ecrireDansResponse) {
-        if (ListQuestion.OuiNon.getValue().endsWith(param)){
+        if (ListQuestion.repondTjrsOui.getValue().equals(param)){
+          ecrireDansResponse = ListQuestion.NON.getValue();
+        } else if (ListQuestion.OuiNon.getValue().endsWith(param)){
             ecrireDansResponse = ListQuestion.OUI.getValue();
-        } else if (ListQuestion.PasTopBofQuelsBugs.getValue().endsWith(param)){
-            ecrireDansResponse = ListQuestion.BOF.getValue();
+        }  else if (ListQuestion.PasTopBofQuelsBugs.getValue().endsWith(param)){
+            ecrireDansResponse = ListQuestion.QUELS_BUGS.getValue();
         } else if (ListQuestion.eMail.getValue().equals(formatQuestion(param))) {
             ecrireDansResponse = "ldrogou@gmail.com";
         } else if ("".equals(ecrireDansResponse)) {
