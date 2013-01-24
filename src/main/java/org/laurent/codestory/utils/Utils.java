@@ -5,16 +5,17 @@
 package org.laurent.codestory.utils;
 
 import com.google.common.io.CharStreams;
-import de.congrace.exp4j.Calculable;
-import de.congrace.exp4j.ExpressionBuilder;
-import de.congrace.exp4j.UnknownFunctionException;
-import de.congrace.exp4j.UnparsableExpressionException;
+import org.laurent.codestory.math.Calculable;
+import org.laurent.codestory.math.ExpressionBuilder;
+import org.laurent.codestory.math.UnknownFunctionException;
+import org.laurent.codestory.math.UnparsableExpressionException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
+import java.text.DecimalFormat;
 import java.util.logging.Level;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -34,19 +35,18 @@ public class Utils {
     public final static String SCALASKEL = "/scalaskel/change/";
 
     public static String evaluationMath(String param) {
-
         Calculable calc;
-        BigDecimal result = new BigDecimal(BigInteger.ZERO);
+        BigDecimal resultBigDecimal = new BigDecimal(BigInteger.ZERO);
         try {
             calc = new ExpressionBuilder(param.replaceAll(" ", "+").replaceAll(",", "\\.")).build();
-            result = new BigDecimal(calc.calculate(), MathContext.UNLIMITED);
+            resultBigDecimal = calc.calculate();
         } catch (UnknownFunctionException ex) {
             java.util.logging.Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnparsableExpressionException ex) {
             java.util.logging.Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        return result.toString().replaceAll("\\.", ",");
+        return resultBigDecimal.toString().replaceAll("\\.", ",").replaceAll("\\,00", "").replaceAll("\\,0", "");
+        
     }
 
     public static String formatQuestion(String param) {
