@@ -50,7 +50,7 @@ public class Utils {
     }
 
     public static String formatQuestion(String param) {
-        return param != null ? param.replaceAll(" ", "") : "";
+        return param != null ? param.replaceAll(" ", "+") : "";
     }
 
     public static String get(ServletInputStream in) {
