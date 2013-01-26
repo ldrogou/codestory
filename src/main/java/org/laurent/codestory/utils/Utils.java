@@ -33,6 +33,8 @@ public class Utils {
     static Logger logger = org.slf4j.LoggerFactory.getLogger(Utils.class);
     // Path enonce1 Scalaskel
     public final static String SCALASKEL = "/scalaskel/change/";
+    // Path enonce2 jajascript
+    public final static String JAJASCRIPT = "/jajascript/optimize";
 
     public static String evaluationMath(String param) {
         Calculable calc;

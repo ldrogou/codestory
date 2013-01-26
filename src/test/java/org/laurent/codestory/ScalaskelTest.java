@@ -19,7 +19,7 @@ public class ScalaskelTest {
             + "{\"foo\":1,\"baz\":1}]";
         
     @Test
-    public void testChangeScalaskel() throws IOException {
+    public void scalaskelServiceTest() throws IOException {
         
         ScalaskelService scalaskelSrv = new ScalaskelService();
         String valueSca1 = scalaskelSrv.ecrireJsonScalaskel(1);

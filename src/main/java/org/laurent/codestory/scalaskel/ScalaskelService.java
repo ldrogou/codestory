@@ -21,7 +21,7 @@ import org.slf4j.Logger;
 public class ScalaskelService {
 
     // Logger
-    Logger logger = org.slf4j.LoggerFactory.getLogger(Controller.class);
+    Logger logger = org.slf4j.LoggerFactory.getLogger(ScalaskelService.class);
 
     /**
      * Methode expose pour la construction de la liste de scalaskel contenant toute les possibilites
@@ -61,8 +61,8 @@ public class ScalaskelService {
     /**
      * 
      * @param value Valeur a traiter pour Qix
-     * @param resultList
-     * @param result 
+     * @param resultList Liste contenant les valeurs retour
+     * @param result Scalaskel contenant baz deja traité
      */
     private void constructQixBarFoo(int value, List<ScalaskelJson> resultList, ScalaskelJson result) {
         //Nombre de boucle a effectuer pour Qix
@@ -76,8 +76,8 @@ public class ScalaskelService {
     /**
      * 
      * @param value Valeur a traiter pour Bar
-     * @param resultList
-     * @param resultQixBaz 
+     * @param resultList Liste contenant les valeurs retour
+     * @param resultQixBaz Scalaskel contenant Qiz et bar deja traité
      */
     private void constructBarFoo(int value, List<ScalaskelJson> resultList, ScalaskelJson resultQixBaz) {
         //Nombre de boucle a effectuer pour Bar
@@ -97,7 +97,7 @@ public class ScalaskelService {
      *
      * @param value
      * @param scalaskel
-     * @return the number of coins
+     * @return number du change
      */
     private int getNumberOfChange(int value, Scalaskel scalaskel) {
         return value / scalaskel.getValue();
@@ -108,7 +108,7 @@ public class ScalaskelService {
      * @param value
      * @param compteur
      * @param valueChange
-     * @return 
+     * @return value à traiter
      */
     private int getValue(int value, int compteur, int valueChange){
             return (value - (compteur * valueChange));

@@ -50,16 +50,28 @@ public class Controller extends HttpServlet {
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
 
+        // body de la request
         String bodyReq = Utils.get(request.getInputStream());
-
+        // Path de la requete post
+        String path = request.getServletPath();
+        
         if ("".equals(bodyReq)) {
             logger.error("Probl&egraveme lors de la recup&eacuteration du post");
             // Retourne 400 PB
             response.setStatus(HttpServletResponse.SC_GONE);
+        } else if (path.startsWith(Utils.JAJASCRIPT)) {
+            logger.info(bodyReq);
+            // contenu du traitement
+            
+            // Retourne 201 pour le post avec succes
+            response.setStatus(HttpServletResponse.SC_CREATED);
         } else {
             logger.info(bodyReq);
             // Retourne 201 pour le post avec succes
             response.setStatus(HttpServletResponse.SC_CREATED);
         }
+            
+            
+        
     }
 }
