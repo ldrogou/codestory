@@ -60,8 +60,8 @@ public class Optimize implements Comparable<Optimize> {
 
     @Override
     public int compareTo(Optimize o) {
-        // une version complète de cette méthode
-        // doit gérer le cas où nom et prenom sont nuls
+        // une version complete de cette methode
+        // doit gerer le cas ou nom et prenom sont nuls
         return (getGain() > o.getGain() ? -1 : (getGain() == o.getGain() ? 0 : 1));
     }
 

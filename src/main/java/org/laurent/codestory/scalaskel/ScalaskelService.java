@@ -11,7 +11,6 @@ import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonMethod;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.laurent.codestory.Controller;
 import org.slf4j.Logger;
 
 /**
@@ -62,7 +61,7 @@ public class ScalaskelService {
      * 
      * @param value Valeur a traiter pour Qix
      * @param resultList Liste contenant les valeurs retour
-     * @param result Scalaskel contenant baz deja traité
+     * @param result Scalaskel contenant baz deja traite
      */
     private void constructQixBarFoo(int value, List<ScalaskelJson> resultList, ScalaskelJson result) {
         //Nombre de boucle a effectuer pour Qix
@@ -77,7 +76,7 @@ public class ScalaskelService {
      * 
      * @param value Valeur a traiter pour Bar
      * @param resultList Liste contenant les valeurs retour
-     * @param resultQixBaz Scalaskel contenant Qiz et bar deja traité
+     * @param resultQixBaz Scalaskel contenant Qiz et bar deja traite
      */
     private void constructBarFoo(int value, List<ScalaskelJson> resultList, ScalaskelJson resultQixBaz) {
         //Nombre de boucle a effectuer pour Bar
@@ -108,7 +107,7 @@ public class ScalaskelService {
      * @param value
      * @param compteur
      * @param valueChange
-     * @return value à traiter
+     * @return value a traiter
      */
     private int getValue(int value, int compteur, int valueChange){
             return (value - (compteur * valueChange));

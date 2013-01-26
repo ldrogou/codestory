@@ -35,14 +35,14 @@ public class JajascriptService {
             logger.error(ex.getMessage());
         } 
         
-        // mise en ordre de la liste sur l'heure de départ
+        // mise en ordre de la liste sur l heure de depart
         Collections.sort(listJajascript);
         //
         SortedSet<Optimize> listOptimize = new TreeSet<Optimize>();
         // boucle sur
         for (Jajascript jajascript : listJajascript){
             long newheureArrive;
-            // date départ du jajascript a tester
+            // date depart du jajascript a tester
             newheureArrive = jajascript.getArrivee();
             //nouvelle instance optimize
             Optimize optimize = new Optimize();
