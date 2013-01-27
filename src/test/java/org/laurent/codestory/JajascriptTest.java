@@ -15,6 +15,7 @@ public class JajascriptTest {
     
     public static final String jajascriptTest1 = "{\"gain\":10,\"path\":[\"AF514\"]}";
     public static final String jajascriptTest2 = "{\"gain\":18,\"path\":[\"MONAD42\",\"LEGACY01\"]}";
+    public static final String jajascriptTest3 = "{\"gain\":12,\"path\":[\"AF1\",\"AF3\",\"AF2\"]}";
 
     
     public JajascriptTest() {
@@ -43,9 +44,10 @@ public class JajascriptTest {
         JajascriptService jajascriptSrv = new JajascriptService();
         String valueJaja1 = jajascriptSrv.optimizeJajaScript(" [ {\"VOL\": \"AF514\", \"DEPART\":0, \"DUREE\":5, \"PRIX\": 10} ]");
         String valueJaja2 = jajascriptSrv.optimizeJajaScript(" [ {\"VOL\": \"YAGNI17\", \"DEPART\": 5, \"DUREE\": 9, \"PRIX\": 7 }, { \"VOL\": \"META18\", \"DEPART\": 3, \"DUREE\": 7, \"PRIX\": 14 },    { \"VOL\": \"LEGACY01\", \"DEPART\": 5, \"DUREE\": 9, \"PRIX\": 8 }, {\"VOL\": \"MONAD42\", \"DEPART\": 0, \"DUREE\": 5, \"PRIX\": 10 }]");
-        
+        String valueJaja3 = jajascriptSrv.optimizeJajaScript("[ {\"VOL\": \"AF1\", \"DEPART\":0, \"DUREE\":1, \"PRIX\": 2}, {\"VOL\": \"AF2\", \"DEPART\":4, \"DUREE\":1, \"PRIX\": 4}, {\"VOL\": \"AF3\", \"DEPART\":2, \"DUREE\":1, \"PRIX\": 6} ]");
         Assert.assertEquals(jajascriptTest1, valueJaja1);
         Assert.assertEquals(jajascriptTest2, valueJaja2);
+        Assert.assertEquals(jajascriptTest3, valueJaja3);
         
     }
 }
