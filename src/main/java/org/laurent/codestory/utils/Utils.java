@@ -84,9 +84,11 @@ public class Utils {
     public static void faireReponseQuestion(HttpServletResponse response, String param, String ecrireDansResponse) {
         if (formatQuestion(param).equals(ListQuestion.repondTjrsOui.getValue())){
           ecrireDansResponse = ListQuestion.NON.getValue();
-        } else if (formatQuestion(param).contains(ListQuestion.OuiNon.getValue())){
+        } else if (formatQuestion(param).contains(ListQuestion.ouiNon.getValue())){
             ecrireDansResponse = ListQuestion.OUI.getValue();
-        } else if (formatQuestion(param).contains(ListQuestion.PasTopBofQuelsBugs.getValue())){
+        } else if (formatQuestion(param).contains(ListQuestion.ouiNonNicolas.getValue())){
+            ecrireDansResponse = ListQuestion.NON.getValue();
+        } else if (formatQuestion(param).contains(ListQuestion.pasTopBofQuelsBugs.getValue())){
             ecrireDansResponse = ListQuestion.BOF.getValue();
         } else if (formatQuestion(param).equals(ListQuestion.eMail.getValue())) {
             ecrireDansResponse = "ldrogou@gmail.com";

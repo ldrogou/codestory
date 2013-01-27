@@ -37,7 +37,6 @@ public class JajascriptService {
 
         // mise en ordre de la liste sur l heure de depart
         Collections.sort(listJajascript);
-        System.out.println("listJajascript " + listJajascript);
         //
         SortedSet<Optimize> listOptimize = new TreeSet<Optimize>();
         // boucle sur
@@ -74,8 +73,6 @@ public class JajascriptService {
             listOptimize.add(optimize);
         }
 
-        System.out.println(
-                "optimize " + listOptimize);
         // Mapper json avec option d'inclusion
         ObjectMapper mapperOptimize = new ObjectMapper().setVisibility(JsonMethod.FIELD, JsonAutoDetect.Visibility.ANY);
 
