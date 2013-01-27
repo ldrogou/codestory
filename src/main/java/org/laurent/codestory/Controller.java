@@ -58,7 +58,7 @@ public class Controller extends HttpServlet {
         // Path de la requete post
         String path = request.getServletPath();
 
-        //Ecrire la réponse
+        //Ecrire la reponse
         String ecrireReponse = "";
         if ("".equals(bodyReq)) {
             logger.error("Probl&egraveme lors de la recup&eacuteration du post");
