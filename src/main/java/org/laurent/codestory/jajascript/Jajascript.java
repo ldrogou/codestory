@@ -146,7 +146,7 @@ public class Jajascript implements Comparable<Jajascript> {
 
     @Override
     public int compareTo(Jajascript j) {
-        return (getDepart()>j.getDepart() ? -1 : (getDepart()==j.getDepart() ? 0 : 1));
+        return (getDepart()<j.getDepart() ? -1 : (getDepart()==j.getDepart() ? 0 : 1));
     }
     
     
