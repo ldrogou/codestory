@@ -53,7 +53,7 @@ public class JajascriptService {
             Jajascript jajascriptTemp = new Jajascript();
             // boucle sur les autres jaja pour optimize
             for (Jajascript jajascriptCompareOptimize : listJajascript) {
-                if (jajascript.getArrivee() <= jajascriptCompareOptimize.getDepart()) {
+                if (jajascript.getArrivee() <= jajascriptCompareOptimize.getDepart() && jajascript.getDepart() < jajascriptCompareOptimize.getDepart()) {
                     if (newheureArrive <= jajascriptCompareOptimize.getDepart()) {
                         // optimize temporaire pour les tests
                         jajascriptTemp = jajascriptCompareOptimize;
@@ -61,11 +61,12 @@ public class JajascriptService {
                         optimize.setGain(optimize.getGain() + jajascriptCompareOptimize.getPrix());
                         listPath.add(jajascriptCompareOptimize.getVol());
                     } else if (jajascriptTemp.getPrix() < jajascriptCompareOptimize.getPrix()) {
-                        newheureArrive = jajascriptTemp.getArrivee();
                         optimize.setGain(optimize.getGain() - jajascriptTemp.getPrix());
                         optimize.setGain(optimize.getGain() + jajascriptCompareOptimize.getPrix());
                         listPath.remove(jajascriptTemp.getVol());
                         listPath.add(jajascriptCompareOptimize.getVol());
+                        newheureArrive = jajascriptCompareOptimize.getArrivee();
+                        jajascriptTemp = jajascriptCompareOptimize;
                     }
                 }
             }
