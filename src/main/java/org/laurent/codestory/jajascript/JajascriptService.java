@@ -22,12 +22,11 @@ public class JajascriptService {
 
     // Logger
     Logger logger = org.slf4j.LoggerFactory.getLogger(JajascriptService.class);
-//    SortedSet<Optimize> listOptimize1 = new TreeSet<Optimize>();
+    SortedSet<Optimize> listOptimize = new TreeSet<Optimize>();
 //    List<Optimize> listOptimize = new ArrayList<Optimize>();
-    List<Optimize> listOptimize = new LinkedList<Optimize>();
-    
+
     public String optimizeJajaScript(String commande) {
-        
+
         String returnJsonOptimize = "Not Optimize";
         ObjectMapper mapperJajascript = new ObjectMapper(); // can reuse, share globally
         List<Jajascript> listJajascript = null;
@@ -54,18 +53,20 @@ public class JajascriptService {
             optimize.setPath(listPath);
             listOptimize.add(optimize);
             traitementOptimize(jajascript, optimize, listJajascript);
-            
+
         }
 
-        // Mapper json avec option d'inclusion
-        ObjectMapper mapperOptimize = new ObjectMapper().setVisibility(JsonMethod.FIELD, JsonAutoDetect.Visibility.ANY);
-        
-        mapperOptimize.setSerializationInclusion(JsonSerialize.Inclusion.NON_DEFAULT);
-        
-        
-        Collections.sort(listOptimize);
+        List<Optimize> listOptimizeResult = new LinkedList<Optimize>();
+        Iterator<Optimize> it = listOptimize.iterator();
+        while (it.hasNext()) {
+            listOptimizeResult.add(it.next());
+        }
+        Collections.sort(listOptimizeResult);
         try {
-            returnJsonOptimize = mapperOptimize.writeValueAsString(listOptimize.get(0));
+            // Mapper json avec option d'inclusion
+            ObjectMapper mapperOptimize = new ObjectMapper().setVisibility(JsonMethod.FIELD, JsonAutoDetect.Visibility.ANY);
+            mapperOptimize.setSerializationInclusion(JsonSerialize.Inclusion.NON_DEFAULT);
+            returnJsonOptimize = mapperOptimize.writeValueAsString(listOptimizeResult.get(0));
 
 //            returnJsonOptimize = mapperOptimize.writeValueAsString(listOptimize.first());
         } catch (IOException ex) {
@@ -73,7 +74,7 @@ public class JajascriptService {
         }
         return returnJsonOptimize;
     }
-    
+
     private void traitementOptimize(Jajascript jaja, Optimize optimize, List<Jajascript> listJajascript) {
 
         //Optimize optimizeJajascript = optimize;
@@ -83,17 +84,17 @@ public class JajascriptService {
         // boucle sur les autres jaja pour optimize
         for (Jajascript jajascriptCompareOptimize : listJajascript) {
             if (jaja.getArrivee() <= jajascriptCompareOptimize.getDepart()) {
-                if (jajascriptTemp.getDepart() != jajascriptCompareOptimize.getDepart() && 
-                        jajascriptTemp.getArrivee() <= jajascriptCompareOptimize.getDepart()) {
+                if (jajascriptTemp.getDepart() != jajascriptCompareOptimize.getDepart()
+                        && jajascriptTemp.getArrivee() <= jajascriptCompareOptimize.getDepart()) {
                     optimizeTemp = getOptimizeTemp(optimizeTraitement);
                 }
-                if (jajascriptTemp.getArrivee() <= jajascriptCompareOptimize.getDepart() && 
-                        jajascriptTemp.getDepart() < jajascriptCompareOptimize.getDepart()) {
+                if (jajascriptTemp.getArrivee() <= jajascriptCompareOptimize.getDepart()
+                        && jajascriptTemp.getDepart() < jajascriptCompareOptimize.getDepart()) {
                     optimizeTraitement.add(jajascriptCompareOptimize);
                     listOptimize.add(optimizeTraitement);
                     jajascriptTemp = jajascriptCompareOptimize;
-                } else if (jajascriptTemp.getDepart() == jajascriptCompareOptimize.getDepart() || 
-                        jajascriptTemp.getArrivee() >= jajascriptCompareOptimize.getDepart()) {
+                } else if (jajascriptTemp.getDepart() == jajascriptCompareOptimize.getDepart()
+                        || jajascriptTemp.getArrivee() >= jajascriptCompareOptimize.getDepart()) {
                     Optimize opti = getOptimizeTemp(optimizeTemp);
                     opti.add(jajascriptCompareOptimize);
                     listOptimize.add(opti);
@@ -103,7 +104,7 @@ public class JajascriptService {
             }
         }
     }
-    
+
     private Optimize getOptimizeTemp(Optimize optimizeTraitement) {
         Optimize optimizeOut = new Optimize();
         List<String> listenewstring = new ArrayList<String>();
