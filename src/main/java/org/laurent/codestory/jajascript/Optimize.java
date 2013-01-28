@@ -71,6 +71,12 @@ public class Optimize implements Comparable<Optimize> {
     public void removePath(String removePath){
         this.path.remove(removePath);
     }
+    
+    public Optimize add(Jajascript jajascript){
+        this.setGain(getGain() + jajascript.getPrix());
+        this.addPath(jajascript.getVol());
+        return this;
+    }
 
     public Optimize(long gain) {
         this.gain = gain;
