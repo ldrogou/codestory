@@ -33,7 +33,6 @@ public class Jajascript implements Comparable<Jajascript> {
     public void setVol(String vol) {
         this.vol = vol;
     }
-
     @JsonProperty("DEPART")
     private long depart;
 
@@ -54,7 +53,6 @@ public class Jajascript implements Comparable<Jajascript> {
     public void setDepart(long depart) {
         this.depart = depart;
     }
-
     @JsonProperty("DUREE")
     private long duree;
 
@@ -75,29 +73,18 @@ public class Jajascript implements Comparable<Jajascript> {
     public void setDuree(long duree) {
         this.duree = duree;
     }
-
     @JsonProperty("PRIX")
-    private long prix;
+    private int prix;
 
-    /**
-     * Get the value of prix
-     *
-     * @return the value of prix
-     */
-    public long getPrix() {
+    public int getPrix() {
         return prix;
     }
 
-    /**
-     * Set the value of prix
-     *
-     * @param prix new value of prix
-     */
-    public void setPrix(long prix) {
+    public void setPrix(int prix) {
         this.prix = prix;
     }
 
-
+    
     private long arrivee;
 
     /**
@@ -117,8 +104,8 @@ public class Jajascript implements Comparable<Jajascript> {
     public void setArrivee(long arrivee) {
         this.arrivee = arrivee;
     }
-    
-    public final void calcArrivee(long depart, long duree){
+
+    public final void calcArrivee(long depart, long duree) {
         setArrivee(depart + duree);
     }
 
@@ -131,7 +118,7 @@ public class Jajascript implements Comparable<Jajascript> {
     }
 
     @JsonCreator
-    public Jajascript(@JsonProperty("VOL")String vol, @JsonProperty("DEPART")long depart, @JsonProperty("DUREE")long duree, @JsonProperty("PRIX")long prix) {
+    public Jajascript(@JsonProperty("VOL") String vol, @JsonProperty("DEPART") long depart, @JsonProperty("DUREE") long duree, @JsonProperty("PRIX") int prix) {
         this.vol = vol;
         this.depart = depart;
         this.duree = duree;
@@ -146,14 +133,13 @@ public class Jajascript implements Comparable<Jajascript> {
 
     @Override
     public int compareTo(Jajascript j) {
-        return (getDepart()<j.getDepart() ? -1 : (getDepart()==j.getDepart() ? 0 : 1));
+        if (getArrivee() == j.getArrivee()) {
+            return (getVol().compareTo(j.getVol()));
+        }
+        if (getDepart() == j.getDepart()) {
+            return (getArrivee() > j.getArrivee() ? -1 : (getArrivee() == j.getArrivee() ? 0 : 1));
+        } else {
+            return (getDepart() < j.getDepart() ? -1 : (getDepart() == j.getDepart() ? 0 : 1));
+        }
     }
-    
-    
-    
-    
-    
-    
-    
-    
 }

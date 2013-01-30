@@ -11,26 +11,16 @@ import org.codehaus.jackson.annotate.JsonProperty;
  *
  * @author Maelle_Iris
  */
-public class Optimize implements Comparable<Optimize> {
+public class Optimize implements Comparable<Optimize>, Cloneable {
 
     @JsonProperty("gain")
-     private Long gain;
+    private int gain;
 
-    /**
-     * Get the value of gain
-     *
-     * @return the value of gain
-     */
-    public Long getGain() {
+    public int getGain() {
         return gain;
     }
 
-    /**
-     * Set the value of gain
-     *
-     * @param gain new value of gain
-     */
-    public void setGain(Long gain) {
+    public void setGain(int gain) {
         this.gain = gain;
     }
 
@@ -55,48 +45,47 @@ public class Optimize implements Comparable<Optimize> {
     public void setPath(List<String> path) {
         this.path = path;
     }
-    
+
     /**
      * Ajoute un element dans la liste
-     * @param addPath 
+     *
+     * @param addPath
      */
-    public void addPath(String addPath){
+    public void addPath(String addPath) {
         this.path.add(addPath);
     }
-    
+
     /**
-     *  Retire un element de la liste
-     * @param removePath 
+     * Retire un element de la liste
+     *
+     * @param removePath
      */
-    public void removePath(String removePath){
+    public void removePath(String removePath) {
         this.path.remove(removePath);
     }
-    
-    public Optimize add(Jajascript jajascript){
+
+    public Optimize add(Jajascript jajascript) {
         this.setGain(getGain() + jajascript.getPrix());
         this.addPath(jajascript.getVol());
         return this;
     }
 
-    public Optimize(long gain) {
+    public Optimize(int gain) {
         this.gain = gain;
     }
 
     public Optimize() {
     }
 
-    
-
-    
     @Override
     public int compareTo(Optimize o) {
         int retour;
         // une version complete de cette methode
         // doit gerer le cas ou nom et prenom sont nuls
-        if (o == null){
+        if (o == null) {
             retour = 0;
-        }else {
-            retour = o.getGain().compareTo(getGain());
+        } else {
+            retour = o.getGain() - this.gain;
         }
         return retour;
     }
@@ -108,9 +97,7 @@ public class Optimize implements Comparable<Optimize> {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + (this.gain != null ? this.gain.hashCode() : 0);
-        return hash;
+        return this.gain;
     }
 
     @Override
@@ -122,23 +109,27 @@ public class Optimize implements Comparable<Optimize> {
             return false;
         }
         final Optimize other = (Optimize) obj;
-        if (this.gain != other.gain && (this.gain == null || !this.gain.equals(other.gain))) {
+        if (this.gain != other.gain) {
             return false;
         }
-        
-        for(int i=0; i<=path.size(); i++){
-            if (!path.get(i).equals(other.path.get(i))){
-                return false;
-            }
-        }
+
+
         return true;
     }
 
-    
-
-    
-    
-    
-    
-    
+    @Override
+    public Optimize clone() {
+        Optimize o = null;
+        try {
+            // On récupère l'instance à renvoyer par l'appel de la 
+            // méthode super.clone()
+            o = (Optimize) super.clone();
+        } catch (CloneNotSupportedException cnse) {
+            // Ne devrait jamais arriver car nous implémentons 
+            // l'interface Cloneable
+            cnse.printStackTrace(System.err);
+        }
+        // on renvoie le clone
+        return o;
+    }
 }
