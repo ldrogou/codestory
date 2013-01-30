@@ -121,12 +121,12 @@ public class Optimize implements Comparable<Optimize>, Cloneable {
     public Optimize clone() {
         Optimize o = null;
         try {
-            // On récupère l'instance à renvoyer par l'appel de la 
-            // méthode super.clone()
+            // On recupere l instance a renvoyer par l appel de la 
+            // methode super.clone()
             o = (Optimize) super.clone();
         } catch (CloneNotSupportedException cnse) {
-            // Ne devrait jamais arriver car nous implémentons 
-            // l'interface Cloneable
+            // Ne devrait jamais arriver car nous implementons 
+            // l interface Cloneable
             cnse.printStackTrace(System.err);
         }
         // on renvoie le clone
